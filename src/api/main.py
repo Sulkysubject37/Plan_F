@@ -30,11 +30,19 @@ async def lifespan(app: FastAPI):
     global model, dataset, feature_map
     
     print("Loading Plan F Model...")
-    data_path = os.path.join(os.getcwd(), 'data', 'processed_strategy_data.csv')
-    model_path = os.path.join(os.getcwd(), 'models', 'neural_ode_strategy_model_rk4_sindy.pth')
+    
+    # Use absolute paths relative to this file (src/api/main.py)
+    # Go up two levels to reach root, then into data/ or models/
+    base_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "../.."))
+    data_path = os.path.join(base_dir, 'data', 'processed_strategy_data.csv')
+    model_path = os.path.join(base_dir, 'models', 'neural_ode_strategy_model_rk4_sindy.pth')
+    
+    print(f"Looking for data at: {data_path}")
+    print(f"Looking for model at: {model_path}")
     
     if not os.path.exists(data_path):
-        print(f"WARNING: Data not found at {data_path}")
+        print(f"CRITICAL ERROR: Data not found at {data_path}")
+        # In production, we might want to raise an error, but for now let's print
     
     dataset = F1StrategyDataset(data_path)
     input_dim = len(dataset.features)
