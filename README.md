@@ -1,3 +1,12 @@
+---
+title: "Plan F: Neural ODE Strategy Engine"
+emoji: "🏎️"
+colorFrom: "red"
+colorTo: "yellow"
+sdk: docker
+app_port: 7860
+---
+
 # Plan F: Neural ODE Strategy Engine
 
 **Plan F** is a race strategy simulation engine designed to model Formula 1 race dynamics using **Neural Ordinary Differential Equations (Neural ODEs)**. 
