@@ -146,7 +146,7 @@ def train_neural_ode(
         print(f"Epoch {epoch+1}/{epochs}, Loss: {total_loss/len(dataloader):.4f}")
 
     print("\n--- Training Complete ---")
-    model_filename = f'neural_ode_strategy_model_{solver}{'_sindy' if use_sindy else ''}{'_physics' if use_physics else ''}.pth'
+    model_filename = f"neural_ode_strategy_model_{solver}{'_sindy' if use_sindy else ''}{'_physics' if use_physics else ''}.pth"
     torch.save(model.state_dict(), os.path.join(os.getcwd(), 'models', model_filename))
     print(f"Model saved to models/{model_filename}")
 
