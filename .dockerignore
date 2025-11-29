@@ -1,0 +1,7 @@
+web/
+.git/
+.gitignore
+notebooks/
+scuderia-ferrari-hp-sf25.zip
+__pycache__
+*.pyc

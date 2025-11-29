@@ -1,0 +1,11 @@
+fastf1
+torch
+torchdiffeq
+pandas
+numpy
+matplotlib
+plotly
+scipy
+scikit-learn
+fastapi
+uvicorn
