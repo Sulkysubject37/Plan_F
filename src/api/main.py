@@ -2,6 +2,7 @@ import sys
 import os
 import torch
 import numpy as np
+from datetime import date
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.exceptions import RequestValidationError
@@ -17,7 +18,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 from src.neural_ode_model import NeuralODE
 from src.train_model import F1StrategyDataset
 from src.api.schemas import SimulateRequest, SimulateResponse, SimulationPoint
-from src.api.data import CALENDAR_2025, GrandPrix
+from src.api.data import CALENDAR_2026, GrandPrix
 
 # Global variables for model and dataset
 model = None
@@ -87,7 +88,18 @@ def read_root():
 
 @app.get("/calendar", response_model=List[GrandPrix])
 def get_calendar():
-    return CALENDAR_2025
+    today = date.today()
+    updated_calendar = []
+    
+    for gp in CALENDAR_2026:
+        # Check if race date has passed
+        race_date = date.fromisoformat(gp.date)
+        # Update is_completed status dynamically
+        gp_copy = gp.model_copy()
+        gp_copy.is_completed = race_date < today
+        updated_calendar.append(gp_copy)
+        
+    return updated_calendar
 
 @app.post("/simulate", response_model=SimulateResponse)
 def simulate_strategy(req: SimulateRequest):

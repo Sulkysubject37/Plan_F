@@ -15,7 +15,7 @@ const Calendar: React.FC = () => {
     return (
         <Container className="page-container">
              <div className="section-title">
-                <h1 className="font-impact display-4">2025 SEASON</h1>
+                <h1 className="font-impact display-4">2026 SEASON</h1>
             </div>
             
             <Row>
